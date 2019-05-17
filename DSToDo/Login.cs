@@ -15,6 +15,13 @@ namespace DSToDo
         public Login()
         {
             InitializeComponent();
+            loadLogo();
+        }
+
+
+        private void loadLogo()
+        {
+            pictureBox1.Image = Image.FromFile(@"S:\Design and Supply CSharp\LogoIcon\ToDo-list-icon.png");
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -30,6 +37,11 @@ namespace DSToDo
             {
                 MessageBox.Show("Invalid login credential, please try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
 
         }
     }

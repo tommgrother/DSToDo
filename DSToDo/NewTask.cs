@@ -19,6 +19,8 @@ namespace DSToDo
 
         private void NewTask_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'user_infoDataSet1.user' table. You can move, or remove it, as needed.
+            this.userTableAdapter.Fill(this.user_infoDataSet1.user);
             // TODO: This line of code loads data into the 'user_infoDataSet.user' table. You can move, or remove it, as needed.
             this.userTableAdapter.Fill(this.user_infoDataSet.user);
 
@@ -27,8 +29,23 @@ namespace DSToDo
         private void btnSave_Click(object sender, EventArgs e)
         {
             Task t = new Task();
-            t.createTask(Convert.ToInt32(cmbSetForID.SelectedValue), Convert.ToDateTime(dteDueDate.Text), cmbPriority.SelectedText, txtDetail.Text);
+
+            //TODO ALLOW TIME PICKING NOT JUST DATE
+            t.createTask(Convert.ToInt32(cmbSetForID.SelectedValue), Convert.ToDateTime(dteDueDate.Text), cmbPriority.Text, txtDetail.Text);
             this.Close();
+        }
+
+        private void fillByToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.userTableAdapter.FillBy(this.user_infoDataSet.user);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

@@ -32,18 +32,18 @@ namespace DSToDo
             int currentUserID = Session.userID;
 
 
-            string command = "INSERT INTO DBO.TASK (setByID,setforID,dueDate,createdDate,priorityLevel,taskDetail) " +
-                "VALUES (@setByID,@setForID,@dueDate,@createdDate,@priorityLevel,@taskDetail)";
+            string command = "usp_add_task";
 
             using (SqlCommand cmd = new SqlCommand(command,conn))
             {
                 conn.Open();
-                cmd.Parameters.AddWithValue("@setByID", currentUserID);
-                cmd.Parameters.AddWithValue("@setForID", setForID);
-                cmd.Parameters.AddWithValue("@dueDate", dueDate);
-                cmd.Parameters.AddWithValue("@createdDate", DateTime.Now);
-                cmd.Parameters.AddWithValue("@priorityLevel", priorityLevel);
-                cmd.Parameters.AddWithValue("@taskDetail", taskDetail);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@setByID", SqlDbType.Int).Value = Session.userID;
+                cmd.Parameters.AddWithValue("@setForID", SqlDbType.Int).Value = setForID;
+                cmd.Parameters.AddWithValue("@dueDate", SqlDbType.DateTime).Value = dueDate;
+                cmd.Parameters.AddWithValue("@createdDate",SqlDbType.DateTime).Value = DateTime.Now;
+                cmd.Parameters.AddWithValue("@priorityLevel", SqlDbType.NVarChar).Value = priorityLevel;
+                cmd.Parameters.AddWithValue("@taskDetail", SqlDbType.NVarChar).Value = taskDetail;
                 cmd.ExecuteNonQuery();
 
                 conn.Close();

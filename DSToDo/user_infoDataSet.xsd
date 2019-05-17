@@ -162,7 +162,16 @@
               <Mapping SourceColumn="notification_user" DataSetColumn="notification_user" />
               <Mapping SourceColumn="invoice_query_amend" DataSetColumn="invoice_query_amend" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="user_infoConnectionString (Settings)" DbObjectName="user_info.dbo.[user]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT id, username, password, forename, surname, [current], item_creator_admin, door_order_transport, door_order_account, door_order_admin, master_user, job_title, slimline, department, clock_in_id, actual_department, super_user, ShopFloor, DrawingIdentifier, email_address, CalendarAccess, ShopFloorListAccess, PunchUpdateAccess, user_allocated_selected_id, allocation_dept_2, allocation_dept_3, DoorOrderAccess, ComplaintProgramAccess, FittingProgramAccess, UKFloodAccess, DrawingProgramAccess, PriceLogAccess, CEProgramAccess, production_planner_access, sales_research_access, door_order_stock, po_validation, email, po_access, production_planner_access_slimline, for_attention_of_complaint, current_department_id, current_absent, dispatch_operator, complaint_validation, status_change_y_n, complaint_reciever, remake_validation_y_n, packing_group, standard_hours, lunch_paid, user_lunch_time_out, user_lunch_time_in, manual_validation_y_n, price_confirmation_y_n, default_in_department, allocation_dept_4, allocation_dept_5, estimating_skill_level, programming_skill_level, drawing_skill_level, enquiry_log_admin, can_pack_slimline, slimline_staff, allocation_dept_6, HAVS_exposure_daily_limit, notification_user, invoice_query_amend FROM dbo.[user]</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
         </Tables>
         <Sources />
@@ -172,7 +181,7 @@
   <xs:element name="user_infoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="user_infoDataSet" msprop:Generator_UserDSName="user_infoDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="user" msprop:Generator_TableClassName="userDataTable" msprop:Generator_TableVarName="tableuser" msprop:Generator_TablePropName="user" msprop:Generator_RowDeletingName="userRowDeleting" msprop:Generator_RowChangingName="userRowChanging" msprop:Generator_RowEvHandlerName="userRowChangeEventHandler" msprop:Generator_RowDeletedName="userRowDeleted" msprop:Generator_UserTableName="user" msprop:Generator_RowChangedName="userRowChanged" msprop:Generator_RowEvArgName="userRowChangeEvent" msprop:Generator_RowClassName="userRow">
+        <xs:element name="user" msprop:Generator_TableClassName="userDataTable" msprop:Generator_TableVarName="tableuser" msprop:Generator_RowChangedName="userRowChanged" msprop:Generator_TablePropName="user" msprop:Generator_RowDeletingName="userRowDeleting" msprop:Generator_RowChangingName="userRowChanging" msprop:Generator_RowEvHandlerName="userRowChangeEventHandler" msprop:Generator_RowDeletedName="userRowDeleted" msprop:Generator_RowClassName="userRow" msprop:Generator_UserTableName="user" msprop:Generator_RowEvArgName="userRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />

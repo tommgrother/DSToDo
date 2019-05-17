@@ -3793,11 +3793,15 @@ namespace DSToDo.user_infoDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT id, username, password, forename, surname, [current], item_creator_admin, door_order_transport, door_order_account, door_order_admin, master_user, job_title, slimline, department, clock_in_id, actual_department, super_user, ShopFloor, DrawingIdentifier, email_address, CalendarAccess, ShopFloorListAccess, PunchUpdateAccess, user_allocated_selected_id, allocation_dept_2, allocation_dept_3, DoorOrderAccess, ComplaintProgramAccess, FittingProgramAccess, UKFloodAccess, DrawingProgramAccess, PriceLogAccess, CEProgramAccess, production_planner_access, sales_research_access, door_order_stock, po_validation, email, po_access, production_planner_access_slimline, for_attention_of_complaint, current_department_id, current_absent, dispatch_operator, complaint_validation, status_change_y_n, complaint_reciever, remake_validation_y_n, packing_group, standard_hours, lunch_paid, user_lunch_time_out, user_lunch_time_in, manual_validation_y_n, price_confirmation_y_n, default_in_department, allocation_dept_4, allocation_dept_5, estimating_skill_level, programming_skill_level, drawing_skill_level, enquiry_log_admin, can_pack_slimline, slimline_staff, allocation_dept_6, HAVS_exposure_daily_limit, notification_user, invoice_query_amend FROM dbo.[user]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"SELECT id, username, password, forename, surname, [current], item_creator_admin, door_order_transport, door_order_account, door_order_admin, master_user, job_title, slimline, department, clock_in_id, actual_department, super_user, ShopFloor, DrawingIdentifier, email_address, CalendarAccess, ShopFloorListAccess, PunchUpdateAccess, user_allocated_selected_id, allocation_dept_2, allocation_dept_3, DoorOrderAccess, ComplaintProgramAccess, FittingProgramAccess, UKFloodAccess, DrawingProgramAccess, PriceLogAccess, CEProgramAccess, production_planner_access, sales_research_access, door_order_stock, po_validation, email, po_access, production_planner_access_slimline, for_attention_of_complaint, current_department_id, current_absent, dispatch_operator, complaint_validation, status_change_y_n, complaint_reciever, remake_validation_y_n, packing_group, standard_hours, lunch_paid, user_lunch_time_out, user_lunch_time_in, manual_validation_y_n, price_confirmation_y_n, default_in_department, allocation_dept_4, allocation_dept_5, estimating_skill_level, programming_skill_level, drawing_skill_level, enquiry_log_admin, can_pack_slimline, slimline_staff, allocation_dept_6, HAVS_exposure_daily_limit, notification_user, invoice_query_amend FROM dbo.[user]";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3822,6 +3826,19 @@ namespace DSToDo.user_infoDataSetTableAdapters {
             user_infoDataSet.userDataTable dataTable = new user_infoDataSet.userDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBy(user_infoDataSet.userDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

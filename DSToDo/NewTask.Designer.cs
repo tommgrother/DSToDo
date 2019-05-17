@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewTask));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,12 +38,16 @@
             this.cmbPriority = new System.Windows.Forms.ComboBox();
             this.dteDueDate = new System.Windows.Forms.DateTimePicker();
             this.cmbSetForID = new System.Windows.Forms.ComboBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.user_infoDataSet = new DSToDo.user_infoDataSet();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.user_infoDataSet = new DSToDo.user_infoDataSet();
+            this.btnSave = new System.Windows.Forms.Button();
             this.userTableAdapter = new DSToDo.user_infoDataSetTableAdapters.userTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.user_infoDataSet)).BeginInit();
+            this.user_infoDataSet1 = new DSToDo.user_infoDataSet();
+            this.userBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.user_infoDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.user_infoDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -110,7 +115,7 @@
             // 
             // cmbSetForID
             // 
-            this.cmbSetForID.DataSource = this.userBindingSource;
+            this.cmbSetForID.DataSource = this.userBindingSource1;
             this.cmbSetForID.DisplayMember = "forename";
             this.cmbSetForID.FormattingEnabled = true;
             this.cmbSetForID.Location = new System.Drawing.Point(72, 21);
@@ -118,6 +123,16 @@
             this.cmbSetForID.Size = new System.Drawing.Size(200, 21);
             this.cmbSetForID.TabIndex = 7;
             this.cmbSetForID.ValueMember = "id";
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataMember = "user";
+            this.userBindingSource.DataSource = this.user_infoDataSet;
+            // 
+            // user_infoDataSet
+            // 
+            this.user_infoDataSet.DataSetName = "user_infoDataSet";
+            this.user_infoDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btnSave
             // 
@@ -129,25 +144,25 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // user_infoDataSet
-            // 
-            this.user_infoDataSet.DataSetName = "user_infoDataSet";
-            this.user_infoDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // userBindingSource
-            // 
-            this.userBindingSource.DataMember = "user";
-            this.userBindingSource.DataSource = this.user_infoDataSet;
-            // 
             // userTableAdapter
             // 
             this.userTableAdapter.ClearBeforeFill = true;
+            // 
+            // user_infoDataSet1
+            // 
+            this.user_infoDataSet1.DataSetName = "user_infoDataSet";
+            this.user_infoDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // userBindingSource1
+            // 
+            this.userBindingSource1.DataMember = "user";
+            this.userBindingSource1.DataSource = this.user_infoDataSet1;
             // 
             // NewTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 352);
+            this.ClientSize = new System.Drawing.Size(656, 355);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cmbSetForID);
             this.Controls.Add(this.dteDueDate);
@@ -157,13 +172,16 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewTask";
             this.Text = "New Task";
             this.Load += new System.EventHandler(this.NewTask_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.user_infoDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.user_infoDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.user_infoDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,5 +201,7 @@
         private user_infoDataSet user_infoDataSet;
         private System.Windows.Forms.BindingSource userBindingSource;
         private user_infoDataSetTableAdapters.userTableAdapter userTableAdapter;
+        private user_infoDataSet user_infoDataSet1;
+        private System.Windows.Forms.BindingSource userBindingSource1;
     }
 }

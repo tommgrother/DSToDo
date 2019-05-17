@@ -17,6 +17,7 @@ namespace DSToDo
         {
             InitializeComponent();
             populateTasks();
+            populateTasksSent();
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
@@ -30,7 +31,7 @@ namespace DSToDo
             SqlConnection conn = new SqlConnection(Connection.ConnectionString);
 
             //TODO CHANGE WHERE STATEMENT
-            using (SqlCommand cmd = new SqlCommand("Select [Due Date], [Created Date],[Set By],[Detail] Priority FROM dbo.view_task_list where setForID = @setForID", conn))
+            using (SqlCommand cmd = new SqlCommand("Select [Due Date], [Created Date],[Set By], Priority,[Detail] FROM dbo.view_task_list where setForID = @setForID", conn))
             {
                 cmd.Parameters.AddWithValue("@setForID", Session.userID);
                 SqlDataAdapter ad = new SqlDataAdapter(cmd);
@@ -38,6 +39,33 @@ namespace DSToDo
                 ad.Fill(dt);
 
                 dgTasks.DataSource = dt;
+
+                //TODO NEEDS WORK ON WIDTHS
+                //DataGridViewColumn column = dgTasks.Columns[0];
+                //column.Width = 60;
+                //DataGridViewColumn column2 = dgTasks.Columns[1];
+                //column2.Width = 20;
+                //DataGridViewColumn column3 = dgTasks.Columns[3];
+                //column3.Width = 20;
+
+                conn.Close();
+
+            }
+        }
+
+        private void populateTasksSent()
+        {
+            SqlConnection conn = new SqlConnection(Connection.ConnectionString);
+
+            //TODO CHANGE WHERE STATEMENT
+            using (SqlCommand cmd = new SqlCommand("Select [Due Date], [Created Date],[Task For], Priority,[Detail] FROM dbo.view_task_list where setByID = @setByID", conn))
+            {
+                cmd.Parameters.AddWithValue("@setByID", Session.userID);
+                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                ad.Fill(dt);
+
+                dgTasksSent.DataSource = dt;
 
                 conn.Close();
 
@@ -49,6 +77,7 @@ namespace DSToDo
             NewTask n = new NewTask();
             n.ShowDialog();
             populateTasks();
+            populateTasksSent();
         }
     }
 }
