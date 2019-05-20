@@ -74,6 +74,7 @@
             this.dgTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgTasks.Size = new System.Drawing.Size(767, 323);
             this.dgTasks.TabIndex = 0;
+            this.dgTasks.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTasks_CellDoubleClick);
             // 
             // menuStrip2
             // 
@@ -132,7 +133,6 @@
             this.dgTasksSent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgTasksSent.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgTasksSent.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgTasksSent.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgTasksSent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;

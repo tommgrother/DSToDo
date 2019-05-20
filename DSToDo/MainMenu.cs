@@ -18,11 +18,16 @@ namespace DSToDo
             InitializeComponent();
             populateTasks();
             populateTasksSent();
+           
+           
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
             this.Text = "ToDo - Logged in as: " + Session.fullname + "    Logged in at: " + Session.loggedInTime;
+            formatGrid();
+            formatGridSent();
+          
         }
 
 
@@ -31,7 +36,7 @@ namespace DSToDo
             SqlConnection conn = new SqlConnection(Connection.ConnectionString);
 
             //TODO CHANGE WHERE STATEMENT
-            using (SqlCommand cmd = new SqlCommand("Select [Due Date], [Created Date],[Set By], Priority,[Detail] FROM dbo.view_task_list where setForID = @setForID", conn))
+            using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Set By],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list where setForID = @setForID", conn))
             {
                 cmd.Parameters.AddWithValue("@setForID", Session.userID);
                 SqlDataAdapter ad = new SqlDataAdapter(cmd);
@@ -40,17 +45,46 @@ namespace DSToDo
 
                 dgTasks.DataSource = dt;
 
-                //TODO NEEDS WORK ON WIDTHS
-                //DataGridViewColumn column = dgTasks.Columns[0];
-                //column.Width = 60;
-                //DataGridViewColumn column2 = dgTasks.Columns[1];
-                //column2.Width = 20;
-                //DataGridViewColumn column3 = dgTasks.Columns[3];
-                //column3.Width = 20;
 
                 conn.Close();
 
             }
+        }
+
+
+        private void formatGrid()
+        {
+            DataGridViewColumn column0 = dgTasks.Columns[0];
+            column0.Width = 30;
+            DataGridViewColumn column1 = dgTasks.Columns[1];
+            column1.Width = 65;
+            DataGridViewColumn column2 = dgTasks.Columns[2];
+            column2.Width = 65;
+            DataGridViewColumn column3 = dgTasks.Columns[3];
+            column3.Width = 100;
+            DataGridViewColumn column4 = dgTasks.Columns[4];
+            column4.Width = 350;
+
+            //sent
+            
+
+           
+
+
+        }
+
+        private void formatGridSent()
+        {
+            DataGridViewColumn column0s = dgTasksSent.Columns[0];
+            column0s.Width = 30;
+            DataGridViewColumn column1s = dgTasksSent.Columns[1];
+            column1s.Width = 65;
+            DataGridViewColumn column2s = dgTasksSent.Columns[2];
+            column2s.Width = 65;
+            DataGridViewColumn column3s = dgTasksSent.Columns[3];
+            column3s.Width = 100;
+            DataGridViewColumn column4s = dgTasksSent.Columns[4];
+            column4s.Width = 350;
         }
 
         private void populateTasksSent()
@@ -58,7 +92,7 @@ namespace DSToDo
             SqlConnection conn = new SqlConnection(Connection.ConnectionString);
 
             //TODO CHANGE WHERE STATEMENT
-            using (SqlCommand cmd = new SqlCommand("Select [Due Date], [Created Date],[Task For], Priority,[Detail] FROM dbo.view_task_list where setByID = @setByID", conn))
+            using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Task For],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list where setByID = @setByID", conn))
             {
                 cmd.Parameters.AddWithValue("@setByID", Session.userID);
                 SqlDataAdapter ad = new SqlDataAdapter(cmd);
@@ -76,6 +110,20 @@ namespace DSToDo
         {
             NewTask n = new NewTask();
             n.ShowDialog();
+            populateTasks();
+            populateTasksSent();
+        }
+
+        private void dgTasks_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowindex = dgTasks.CurrentCell.RowIndex;
+            int columnindex = 0;
+
+            double taskID = Convert.ToDouble(dgTasks.Rows[rowindex].Cells[columnindex].Value.ToString());
+
+            UpdateTask ut = new UpdateTask(taskID);
+
+            ut.ShowDialog();
             populateTasks();
             populateTasksSent();
         }
