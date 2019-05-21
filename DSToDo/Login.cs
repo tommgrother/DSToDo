@@ -21,7 +21,7 @@ namespace DSToDo
 
         private void loadLogo()
         {
-            pictureBox1.Image = Image.FromFile(@"\\designsvr1\apps\Design and Supply CSharp\LogoIcon\ToDo-list-icon.png");
+            //pictureBox1.Image = Image.FromFile(@"\\designsvr1\apps\Design and Supply CSharp\LogoIcon\ToDo-list-icon.png");
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -32,6 +32,7 @@ namespace DSToDo
             {
                 MainMenu m = new MainMenu();
                 m.Show();
+                this.Hide();
             }
             else
             {

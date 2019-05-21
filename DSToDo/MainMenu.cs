@@ -35,20 +35,37 @@ namespace DSToDo
         {
             SqlConnection conn = new SqlConnection(Connection.ConnectionString);
 
-            //TODO CHANGE WHERE STATEMENT
-            using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Set By],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list where setForID = @setForID", conn))
+            //FILTERS DIFFERENTLY BASED ON WHETHER THE SHOW COMPLETES CHECKBOX IS TICKED
+            if(chkShowCompletes.Checked == false)
             {
-                cmd.Parameters.AddWithValue("@setForID", Session.userID);
-                SqlDataAdapter ad = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                ad.Fill(dt);
+                using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Set By],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list where ([Task Status]=@taskStatus1 or [Task Status] = @taskStatus2) and setForID = @setForID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@setForID", Session.userID);
+                    cmd.Parameters.AddWithValue("@taskStatus1", "Pending");
+                    cmd.Parameters.AddWithValue("@taskStatus2", "In Progress");
+                    SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    ad.Fill(dt);
+                    dgTasks.DataSource = dt;
+                    conn.Close();
 
-                dgTasks.DataSource = dt;
-
-
-                conn.Close();
-
+                }
             }
+            else
+            {
+                using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Set By],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list where setForID = @setForID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@setForID", Session.userID);
+                
+                    SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    ad.Fill(dt);
+                    dgTasks.DataSource = dt;
+                    conn.Close();
+
+                }
+            }
+            
         }
 
 
@@ -126,6 +143,45 @@ namespace DSToDo
             ut.ShowDialog();
             populateTasks();
             populateTasksSent();
+        }
+
+        private void chkShowCompletes_CheckedChanged(object sender, EventArgs e)
+        {
+            populateTasks();
+        }
+
+        private void refreshListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            populateTasks();
+            populateTasksSent();
+        }
+
+        private void allOutstandingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            SqlConnection conn = new SqlConnection(Connection.ConnectionString);
+
+
+
+            string command = "usp_email_outstanding";
+
+            using (SqlCommand cmd = new SqlCommand(command, conn))
+            {
+                conn.Open();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@userID", SqlDbType.Int).Value = Session.userID;
+
+
+                cmd.ExecuteNonQuery();
+
+                conn.Close();
+
+            }
+
+
+
+
+            
         }
     }
 }

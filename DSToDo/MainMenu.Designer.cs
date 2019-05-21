@@ -34,8 +34,13 @@
             this.dgTasks = new System.Windows.Forms.DataGridView();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.newTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.emailOutstandingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allOutstandingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outstandingByPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTasks = new System.Windows.Forms.TabControl();
             this.forMe = new System.Windows.Forms.TabPage();
+            this.chkShowCompletes = new System.Windows.Forms.CheckBox();
             this.byMe = new System.Windows.Forms.TabPage();
             this.dgTasksSent = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasks)).BeginInit();
@@ -53,7 +58,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTasks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgTasks.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgTasks.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.dgTasks.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgTasks.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -64,7 +69,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgTasks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgTasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTasks.Location = new System.Drawing.Point(6, 6);
+            this.dgTasks.Location = new System.Drawing.Point(6, 38);
             this.dgTasks.MultiSelect = false;
             this.dgTasks.Name = "dgTasks";
             this.dgTasks.RowHeadersVisible = false;
@@ -72,17 +77,19 @@
             this.dgTasks.RowTemplate.ReadOnly = true;
             this.dgTasks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTasks.Size = new System.Drawing.Size(767, 323);
+            this.dgTasks.Size = new System.Drawing.Size(1093, 523);
             this.dgTasks.TabIndex = 0;
             this.dgTasks.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTasks_CellDoubleClick);
             // 
             // menuStrip2
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newTaskToolStripMenuItem});
+            this.newTaskToolStripMenuItem,
+            this.refreshListToolStripMenuItem,
+            this.emailOutstandingToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(801, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(1127, 24);
             this.menuStrip2.TabIndex = 2;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -92,6 +99,35 @@
             this.newTaskToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.newTaskToolStripMenuItem.Text = "New Task";
             this.newTaskToolStripMenuItem.Click += new System.EventHandler(this.newTaskToolStripMenuItem_Click);
+            // 
+            // refreshListToolStripMenuItem
+            // 
+            this.refreshListToolStripMenuItem.Name = "refreshListToolStripMenuItem";
+            this.refreshListToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.refreshListToolStripMenuItem.Text = "Refresh List";
+            this.refreshListToolStripMenuItem.Click += new System.EventHandler(this.refreshListToolStripMenuItem_Click);
+            // 
+            // emailOutstandingToolStripMenuItem
+            // 
+            this.emailOutstandingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allOutstandingToolStripMenuItem,
+            this.outstandingByPersonToolStripMenuItem});
+            this.emailOutstandingToolStripMenuItem.Name = "emailOutstandingToolStripMenuItem";
+            this.emailOutstandingToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.emailOutstandingToolStripMenuItem.Text = "Email Outstanding";
+            // 
+            // allOutstandingToolStripMenuItem
+            // 
+            this.allOutstandingToolStripMenuItem.Name = "allOutstandingToolStripMenuItem";
+            this.allOutstandingToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.allOutstandingToolStripMenuItem.Text = "All Outstanding";
+            this.allOutstandingToolStripMenuItem.Click += new System.EventHandler(this.allOutstandingToolStripMenuItem_Click);
+            // 
+            // outstandingByPersonToolStripMenuItem
+            // 
+            this.outstandingByPersonToolStripMenuItem.Name = "outstandingByPersonToolStripMenuItem";
+            this.outstandingByPersonToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.outstandingByPersonToolStripMenuItem.Text = "Outstanding By Person";
             // 
             // tabTasks
             // 
@@ -103,19 +139,32 @@
             this.tabTasks.Location = new System.Drawing.Point(12, 27);
             this.tabTasks.Name = "tabTasks";
             this.tabTasks.SelectedIndex = 0;
-            this.tabTasks.Size = new System.Drawing.Size(1120, 435);
+            this.tabTasks.Size = new System.Drawing.Size(1446, 667);
             this.tabTasks.TabIndex = 3;
             // 
             // forMe
             // 
+            this.forMe.Controls.Add(this.chkShowCompletes);
             this.forMe.Controls.Add(this.dgTasks);
             this.forMe.Location = new System.Drawing.Point(4, 22);
             this.forMe.Name = "forMe";
             this.forMe.Padding = new System.Windows.Forms.Padding(3);
-            this.forMe.Size = new System.Drawing.Size(1112, 409);
+            this.forMe.Size = new System.Drawing.Size(1438, 641);
             this.forMe.TabIndex = 0;
             this.forMe.Text = "Tasks For Me";
             this.forMe.UseVisualStyleBackColor = true;
+            // 
+            // chkShowCompletes
+            // 
+            this.chkShowCompletes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkShowCompletes.AutoSize = true;
+            this.chkShowCompletes.Location = new System.Drawing.Point(994, 15);
+            this.chkShowCompletes.Name = "chkShowCompletes";
+            this.chkShowCompletes.Size = new System.Drawing.Size(105, 17);
+            this.chkShowCompletes.TabIndex = 1;
+            this.chkShowCompletes.Text = "Show Completes";
+            this.chkShowCompletes.UseVisualStyleBackColor = true;
+            this.chkShowCompletes.CheckedChanged += new System.EventHandler(this.chkShowCompletes_CheckedChanged);
             // 
             // byMe
             // 
@@ -123,7 +172,7 @@
             this.byMe.Location = new System.Drawing.Point(4, 22);
             this.byMe.Name = "byMe";
             this.byMe.Padding = new System.Windows.Forms.Padding(3);
-            this.byMe.Size = new System.Drawing.Size(1112, 409);
+            this.byMe.Size = new System.Drawing.Size(1438, 641);
             this.byMe.TabIndex = 1;
             this.byMe.Text = "Tasks By Me";
             this.byMe.UseVisualStyleBackColor = true;
@@ -134,7 +183,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTasksSent.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgTasksSent.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.dgTasksSent.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgTasksSent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
@@ -160,7 +209,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 381);
+            this.ClientSize = new System.Drawing.Size(1127, 613);
             this.Controls.Add(this.tabTasks);
             this.Controls.Add(this.menuStrip2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -172,6 +221,7 @@
             this.menuStrip2.PerformLayout();
             this.tabTasks.ResumeLayout(false);
             this.forMe.ResumeLayout(false);
+            this.forMe.PerformLayout();
             this.byMe.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgTasksSent)).EndInit();
             this.ResumeLayout(false);
@@ -188,6 +238,11 @@
         private System.Windows.Forms.TabPage forMe;
         private System.Windows.Forms.TabPage byMe;
         private System.Windows.Forms.DataGridView dgTasksSent;
+        private System.Windows.Forms.CheckBox chkShowCompletes;
+        private System.Windows.Forms.ToolStripMenuItem refreshListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem emailOutstandingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allOutstandingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem outstandingByPersonToolStripMenuItem;
     }
 }
 
