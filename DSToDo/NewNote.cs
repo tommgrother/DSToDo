@@ -17,12 +17,16 @@ namespace DSToDo
         {
             InitializeComponent();
             _taskID = taskID;
+           
         }
 
         private void NewNote_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'user_infoDataSet2.view_current_users_with_email' table. You can move, or remove it, as needed.
+            this.view_current_users_with_emailTableAdapter.Fill(this.user_infoDataSet2.view_current_users_with_email);
 
         }
+
 
         private void btnSaveNote_Click(object sender, EventArgs e)
         {
@@ -30,5 +34,7 @@ namespace DSToDo
             n.addNote(_taskID, txtNote.Text);
             this.Close();
         }
+
+ 
     }
 }

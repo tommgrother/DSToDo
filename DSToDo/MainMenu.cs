@@ -107,19 +107,39 @@ namespace DSToDo
         private void populateTasksSent()
         {
             SqlConnection conn = new SqlConnection(Connection.ConnectionString);
-
-            //TODO CHANGE WHERE STATEMENT
-            using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Task For],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list where setByID = @setByID", conn))
+            if (chkShowCompletesSent.Checked == false)
             {
-                cmd.Parameters.AddWithValue("@setByID", Session.userID);
-                SqlDataAdapter ad = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                ad.Fill(dt);
+        
+                using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Task For],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list where ([Task Status]=@taskStatus1 or [Task Status] = @taskStatus2) and setByID = @setByID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@setByID", Session.userID);
+                    cmd.Parameters.AddWithValue("@taskStatus1", "Pending");
+                    cmd.Parameters.AddWithValue("@taskStatus2", "In Progress");
+                    SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    ad.Fill(dt);
 
-                dgTasksSent.DataSource = dt;
+                    dgTasksSent.DataSource = dt;
 
-                conn.Close();
+                    conn.Close();
 
+                }
+            }
+            else
+            {
+             
+                using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Task For],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list where setByID = @setByID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@setByID", Session.userID);
+                    SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    ad.Fill(dt);
+
+                    dgTasksSent.DataSource = dt;
+
+                    conn.Close();
+
+                }
             }
         }
 
@@ -182,6 +202,11 @@ namespace DSToDo
 
 
             
+        }
+
+        private void chkShowCompletesSent_CheckedChanged(object sender, EventArgs e)
+        {
+            populateTasksSent();
         }
     }
 }

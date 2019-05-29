@@ -27,6 +27,7 @@ namespace DSToDo
 
             txtSubject.Text = t.taskSubject;
             txtDetail.Text = t.taskDetail;
+            cmbStatus.Text = t.taskStatus;
 
             //Fill Notes grid
             fillNote();

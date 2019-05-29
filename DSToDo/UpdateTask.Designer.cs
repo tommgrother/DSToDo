@@ -42,6 +42,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.lblTaskID = new System.Windows.Forms.Label();
             this.btnDeligate = new System.Windows.Forms.Button();
+            this.chkNotification = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgNotes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -168,11 +169,22 @@
             this.btnDeligate.Text = "Deligate Task";
             this.btnDeligate.UseVisualStyleBackColor = true;
             // 
+            // chkNotification
+            // 
+            this.chkNotification.AutoSize = true;
+            this.chkNotification.Location = new System.Drawing.Point(438, 303);
+            this.chkNotification.Name = "chkNotification";
+            this.chkNotification.Size = new System.Drawing.Size(149, 17);
+            this.chkNotification.TabIndex = 23;
+            this.chkNotification.Text = "Email notification for notes";
+            this.chkNotification.UseVisualStyleBackColor = true;
+            // 
             // UpdateTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(654, 577);
+            this.Controls.Add(this.chkNotification);
             this.Controls.Add(this.btnDeligate);
             this.Controls.Add(this.lblTaskID);
             this.Controls.Add(this.btnAdd);
@@ -212,5 +224,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label lblTaskID;
         private System.Windows.Forms.Button btnDeligate;
+        private System.Windows.Forms.CheckBox chkNotification;
     }
 }
