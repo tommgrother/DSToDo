@@ -38,11 +38,15 @@ namespace DSToDo
             //FILTERS DIFFERENTLY BASED ON WHETHER THE SHOW COMPLETES CHECKBOX IS TICKED
             if(chkShowCompletes.Checked == false)
             {
-                using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Set By],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list where ([Task Status]=@taskStatus1 or [Task Status] = @taskStatus2) and setForID = @setForID", conn))
+                using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Set By],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list " +
+                    "where ([Task Status]=@taskStatus1 or [Task Status] = @taskStatus2) " +
+                    "and setForID = @setForID " +
+                    "AND (Subject like @search or Details like @search)", conn))
                 {
                     cmd.Parameters.AddWithValue("@setForID", Session.userID);
                     cmd.Parameters.AddWithValue("@taskStatus1", "Pending");
                     cmd.Parameters.AddWithValue("@taskStatus2", "In Progress");
+                    cmd.Parameters.AddWithValue("@search", '%' + txtSearch.Text + '%');
                     SqlDataAdapter ad = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     ad.Fill(dt);
@@ -53,10 +57,13 @@ namespace DSToDo
             }
             else
             {
-                using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Set By],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list where setForID = @setForID", conn))
+                using (SqlCommand cmd = new SqlCommand("Select [Task ID],[Created Date],[Set By],[Subject],[Details], [Due Date],[Task Status],[Date Complete], Priority FROM dbo.view_task_list " +
+                    "where setForID = @setForID " +
+                    "AND (Subject like @search or Details like @search)", conn))
                 {
                     cmd.Parameters.AddWithValue("@setForID", Session.userID);
-                
+                    cmd.Parameters.AddWithValue("@search", '%' + txtSearch.Text + '%');
+
                     SqlDataAdapter ad = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     ad.Fill(dt);
@@ -92,16 +99,24 @@ namespace DSToDo
 
         private void formatGridSent()
         {
-            DataGridViewColumn column0s = dgTasksSent.Columns[0];
-            column0s.Width = 30;
-            DataGridViewColumn column1s = dgTasksSent.Columns[1];
-            column1s.Width = 65;
-            DataGridViewColumn column2s = dgTasksSent.Columns[2];
-            column2s.Width = 65;
-            DataGridViewColumn column3s = dgTasksSent.Columns[3];
-            column3s.Width = 100;
-            DataGridViewColumn column4s = dgTasksSent.Columns[4];
-            column4s.Width = 350;
+            try
+            {
+                DataGridViewColumn column0s = dgTasksSent.Columns[0];
+                column0s.Width = 30;
+                DataGridViewColumn column1s = dgTasksSent.Columns[1];
+                column1s.Width = 65;
+                DataGridViewColumn column2s = dgTasksSent.Columns[2];
+                column2s.Width = 65;
+                DataGridViewColumn column3s = dgTasksSent.Columns[3];
+                column3s.Width = 100;
+                DataGridViewColumn column4s = dgTasksSent.Columns[4];
+                column4s.Width = 350;
+            }
+            catch
+            {
+
+            }
+
         }
 
         private void populateTasksSent()
@@ -207,6 +222,42 @@ namespace DSToDo
         private void chkShowCompletesSent_CheckedChanged(object sender, EventArgs e)
         {
             populateTasksSent();
+        }
+
+        private void dgTasksSent_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+                int rowindex = dgTasksSent.CurrentCell.RowIndex;
+                int columnindex = 0;
+
+                double taskID = Convert.ToDouble(dgTasksSent.Rows[rowindex].Cells[columnindex].Value.ToString());
+
+                UpdateTask ut = new UpdateTask(taskID);
+
+                ut.ShowDialog();
+                populateTasks();
+                populateTasksSent();
+            
+        }
+
+        private void forMe_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            populateTasks();
+        }
+
+        private void menuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void tabTasks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

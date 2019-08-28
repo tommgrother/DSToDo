@@ -40,10 +40,12 @@
             this.outstandingByPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTasks = new System.Windows.Forms.TabControl();
             this.forMe = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.chkShowCompletes = new System.Windows.Forms.CheckBox();
             this.byMe = new System.Windows.Forms.TabPage();
-            this.dgTasksSent = new System.Windows.Forms.DataGridView();
             this.chkShowCompletesSent = new System.Windows.Forms.CheckBox();
+            this.dgTasksSent = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasks)).BeginInit();
             this.menuStrip2.SuspendLayout();
             this.tabTasks.SuspendLayout();
@@ -70,7 +72,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgTasks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgTasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTasks.Location = new System.Drawing.Point(6, 38);
+            this.dgTasks.Location = new System.Drawing.Point(6, 70);
             this.dgTasks.MultiSelect = false;
             this.dgTasks.Name = "dgTasks";
             this.dgTasks.RowHeadersVisible = false;
@@ -78,7 +80,7 @@
             this.dgTasks.RowTemplate.ReadOnly = true;
             this.dgTasks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTasks.Size = new System.Drawing.Size(1093, 523);
+            this.dgTasks.Size = new System.Drawing.Size(1093, 482);
             this.dgTasks.TabIndex = 0;
             this.dgTasks.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTasks_CellDoubleClick);
             // 
@@ -93,6 +95,7 @@
             this.menuStrip2.Size = new System.Drawing.Size(1127, 24);
             this.menuStrip2.TabIndex = 2;
             this.menuStrip2.Text = "menuStrip2";
+            this.menuStrip2.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip2_ItemClicked);
             // 
             // newTaskToolStripMenuItem
             // 
@@ -142,9 +145,12 @@
             this.tabTasks.SelectedIndex = 0;
             this.tabTasks.Size = new System.Drawing.Size(1446, 667);
             this.tabTasks.TabIndex = 3;
+            this.tabTasks.SelectedIndexChanged += new System.EventHandler(this.tabTasks_SelectedIndexChanged);
             // 
             // forMe
             // 
+            this.forMe.Controls.Add(this.label1);
+            this.forMe.Controls.Add(this.txtSearch);
             this.forMe.Controls.Add(this.chkShowCompletes);
             this.forMe.Controls.Add(this.dgTasks);
             this.forMe.Location = new System.Drawing.Point(4, 22);
@@ -154,12 +160,29 @@
             this.forMe.TabIndex = 0;
             this.forMe.Text = "Tasks For Me";
             this.forMe.UseVisualStyleBackColor = true;
+            this.forMe.Click += new System.EventHandler(this.forMe_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Search:";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(56, 11);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(184, 20);
+            this.txtSearch.TabIndex = 2;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // chkShowCompletes
             // 
-            this.chkShowCompletes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkShowCompletes.AutoSize = true;
-            this.chkShowCompletes.Location = new System.Drawing.Point(994, 15);
+            this.chkShowCompletes.Location = new System.Drawing.Point(135, 37);
             this.chkShowCompletes.Name = "chkShowCompletes";
             this.chkShowCompletes.Size = new System.Drawing.Size(105, 17);
             this.chkShowCompletes.TabIndex = 1;
@@ -179,11 +202,24 @@
             this.byMe.Text = "Tasks By Me";
             this.byMe.UseVisualStyleBackColor = true;
             // 
+            // chkShowCompletesSent
+            // 
+            this.chkShowCompletesSent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkShowCompletesSent.AutoSize = true;
+            this.chkShowCompletesSent.Location = new System.Drawing.Point(994, 14);
+            this.chkShowCompletesSent.Name = "chkShowCompletesSent";
+            this.chkShowCompletesSent.Size = new System.Drawing.Size(105, 17);
+            this.chkShowCompletesSent.TabIndex = 2;
+            this.chkShowCompletesSent.Text = "Show Completes";
+            this.chkShowCompletesSent.UseVisualStyleBackColor = true;
+            this.chkShowCompletesSent.CheckedChanged += new System.EventHandler(this.chkShowCompletesSent_CheckedChanged);
+            // 
             // dgTasksSent
             // 
             this.dgTasksSent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTasksSent.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgTasksSent.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgTasksSent.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgTasksSent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -206,18 +242,7 @@
             this.dgTasksSent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgTasksSent.Size = new System.Drawing.Size(1093, 525);
             this.dgTasksSent.TabIndex = 1;
-            // 
-            // chkShowCompletesSent
-            // 
-            this.chkShowCompletesSent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkShowCompletesSent.AutoSize = true;
-            this.chkShowCompletesSent.Location = new System.Drawing.Point(994, 14);
-            this.chkShowCompletesSent.Name = "chkShowCompletesSent";
-            this.chkShowCompletesSent.Size = new System.Drawing.Size(105, 17);
-            this.chkShowCompletesSent.TabIndex = 2;
-            this.chkShowCompletesSent.Text = "Show Completes";
-            this.chkShowCompletesSent.UseVisualStyleBackColor = true;
-            this.chkShowCompletesSent.CheckedChanged += new System.EventHandler(this.chkShowCompletesSent_CheckedChanged);
+            this.dgTasksSent.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTasksSent_CellDoubleClick);
             // 
             // MainMenu
             // 
@@ -259,6 +284,8 @@
         private System.Windows.Forms.ToolStripMenuItem allOutstandingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem outstandingByPersonToolStripMenuItem;
         private System.Windows.Forms.CheckBox chkShowCompletesSent;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label label1;
     }
 }
 
