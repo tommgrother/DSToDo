@@ -13,7 +13,7 @@ namespace DSToDo
         public double _taskID { get; set; }
         public int setByID  { get; set; }
         public int setForID { get; set; }
-        public DateTime dueDate { get; set; }
+        public DateTime? dueDate  { get; set; }
         public DateTime createdDate { get; set; }
         public int priorityLevel { get; set; }
         public string taskDetail { get; set; }
@@ -50,6 +50,30 @@ namespace DSToDo
         }
 
 
+
+        public void updateTaskDueDate(double taskID, DateTime dueDate)
+        {
+            SqlConnection conn = new SqlConnection(Connection.ConnectionString);
+
+
+
+            string command = "update dbo.task set dueDate = @dueDate where id = @taskID";
+
+            using (SqlCommand cmd = new SqlCommand(command, conn))
+            {
+                conn.Open();
+               
+                cmd.Parameters.AddWithValue("@taskID",taskID);
+                cmd.Parameters.AddWithValue("@dueDate", dueDate);
+
+                cmd.ExecuteNonQuery();
+
+                conn.Close();
+
+            }
+        }
+
+
         public void getTask(double taskID)
         {
             SqlConnection conn = new SqlConnection(Connection.ConnectionString);
@@ -68,6 +92,18 @@ namespace DSToDo
                 taskSubject = rdr["taskSubject"].ToString();
                 taskDetail = rdr["taskDetail"].ToString();
                 taskStatus = rdr["taskStatus"].ToString();
+
+                if (string.IsNullOrEmpty(rdr["dueDate"].ToString()))
+                {
+                    dueDate = null;
+                }
+                else
+                {
+                    dueDate = Convert.ToDateTime(rdr["dueDate"]);
+
+                }
+                 
+
             }
 
 

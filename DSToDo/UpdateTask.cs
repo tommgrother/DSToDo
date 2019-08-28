@@ -29,6 +29,13 @@ namespace DSToDo
             txtDetail.Text = t.taskDetail;
             cmbStatus.Text = t.taskStatus;
 
+            if (t.dueDate.HasValue)
+            {
+                DateTime? nullDate = t.dueDate;
+                dteDueDate.Value = (DateTime) nullDate;
+            }
+            
+
             //Fill Notes grid
             fillNote();
             formatGrid();
@@ -58,6 +65,7 @@ namespace DSToDo
         {
             Task t = new Task();
             t.updateTaskStatus(_taskID, cmbStatus.Text);
+            t.updateTaskDueDate(_taskID, dteDueDate.Value);
             this.Close();
         }
 

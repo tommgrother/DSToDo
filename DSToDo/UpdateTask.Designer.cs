@@ -43,13 +43,15 @@
             this.lblTaskID = new System.Windows.Forms.Label();
             this.btnDeligate = new System.Windows.Forms.Button();
             this.chkNotification = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dteDueDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgNotes)).BeginInit();
             this.SuspendLayout();
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 39);
+            this.label5.Location = new System.Drawing.Point(12, 91);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 14;
@@ -58,7 +60,7 @@
             // txtSubject
             // 
             this.txtSubject.Enabled = false;
-            this.txtSubject.Location = new System.Drawing.Point(12, 58);
+            this.txtSubject.Location = new System.Drawing.Point(12, 110);
             this.txtSubject.Name = "txtSubject";
             this.txtSubject.Size = new System.Drawing.Size(621, 20);
             this.txtSubject.TabIndex = 13;
@@ -66,7 +68,7 @@
             // txtDetail
             // 
             this.txtDetail.Enabled = false;
-            this.txtDetail.Location = new System.Drawing.Point(12, 97);
+            this.txtDetail.Location = new System.Drawing.Point(12, 149);
             this.txtDetail.Multiline = true;
             this.txtDetail.Name = "txtDetail";
             this.txtDetail.Size = new System.Drawing.Size(621, 188);
@@ -75,7 +77,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 81);
+            this.label4.Location = new System.Drawing.Point(9, 133);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 13);
             this.label4.TabIndex = 11;
@@ -93,7 +95,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgNotes.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgNotes.Location = new System.Drawing.Point(12, 326);
+            this.dgNotes.Location = new System.Drawing.Point(12, 378);
             this.dgNotes.Name = "dgNotes";
             this.dgNotes.RowHeadersVisible = false;
             this.dgNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -103,7 +105,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 310);
+            this.label1.Location = new System.Drawing.Point(12, 362);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 16;
@@ -116,7 +118,7 @@
             "Pending",
             "In Progress",
             "Complete"});
-            this.cmbStatus.Location = new System.Drawing.Point(512, 493);
+            this.cmbStatus.Location = new System.Drawing.Point(512, 545);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(121, 21);
             this.cmbStatus.TabIndex = 17;
@@ -124,7 +126,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(442, 496);
+            this.label2.Location = new System.Drawing.Point(442, 548);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 18;
@@ -132,7 +134,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(558, 529);
+            this.btnSave.Location = new System.Drawing.Point(558, 581);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 19;
@@ -142,7 +144,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(593, 300);
+            this.btnAdd.Location = new System.Drawing.Point(593, 352);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(40, 23);
             this.btnAdd.TabIndex = 20;
@@ -172,18 +174,36 @@
             // chkNotification
             // 
             this.chkNotification.AutoSize = true;
-            this.chkNotification.Location = new System.Drawing.Point(438, 303);
+            this.chkNotification.Location = new System.Drawing.Point(438, 355);
             this.chkNotification.Name = "chkNotification";
             this.chkNotification.Size = new System.Drawing.Size(149, 17);
             this.chkNotification.TabIndex = 23;
             this.chkNotification.Text = "Email notification for notes";
             this.chkNotification.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 13);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "Task Due:";
+            // 
+            // dteDueDate
+            // 
+            this.dteDueDate.Location = new System.Drawing.Point(12, 61);
+            this.dteDueDate.Name = "dteDueDate";
+            this.dteDueDate.Size = new System.Drawing.Size(139, 20);
+            this.dteDueDate.TabIndex = 25;
+            // 
             // UpdateTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 577);
+            this.ClientSize = new System.Drawing.Size(654, 605);
+            this.Controls.Add(this.dteDueDate);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.chkNotification);
             this.Controls.Add(this.btnDeligate);
             this.Controls.Add(this.lblTaskID);
@@ -225,5 +245,7 @@
         private System.Windows.Forms.Label lblTaskID;
         private System.Windows.Forms.Button btnDeligate;
         private System.Windows.Forms.CheckBox chkNotification;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dteDueDate;
     }
 }
